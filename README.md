@@ -86,6 +86,3 @@ $ git clone https://github.com/sigma-wbi/Graduation_project.git
 3. 결과화면
 
 <img width="60%" src="https://user-images.githubusercontent.com/81278907/235640308-6e78a25b-bb73-4de0-9c16-212a34708081.gif"/>
-
-## Report
-https://github.com/sigma-wbi/Graduation_project
