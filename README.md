@@ -21,17 +21,14 @@
 ## 프로젝트 상세 
 1. **얼굴등록 (store_faces.py)**
 * 거주자 등록  <br>
-
 본 프로젝트는 특정 단지나 아파트 거주민들을 타겟으로 설정한 프로젝트입니다. 아파트 단지에 살고 있는 거주자들의 얼굴 정보를 등록합니다. <br>
 store_faces.py 를 사용하여 아파트 거주자들의 얼굴을 찍습니다. 찍은 사진은 Resident 폴더에 저장됩니다. 
 
 * 자주 출입하는 사람 등록  <br>
-
 해당 아파트 단지의 담당 택배기사님이나 경비아저씨의 경우, 아파트에 거주하지 않을수 있지만 거주하지 않는다고 매번 위험 알림을 보낼시 불편을 야기합니다. <br>
 거주자 등록때와 마찬가지로 store_faces.py 를 사용하여 얼굴을 찍어, often 폴더에 저장합니다.
 
 * 얼굴이 공개된 범죄자 등록  <br>
-
 얼굴이 기록되지 않은 범죄자들이 대다수지만 흉악범등은 미디어를 통해 얼굴이 공개된 경우가 있습니다. <br>
 이런 범죄자들의 얼굴사진을 인터넷에서 얻어 XMAN폴더에 저장합니다. 
 
@@ -106,8 +103,11 @@ $ git clone https://github.com/sigma-wbi/Graduation_project.git
 2. training_recognize_fcm.py 실행
 
 카메라에 비치는 인물이 위험인물인지 판단합니다. <br>
+구별된 그룹에 따라 화면에 표시됩니다. <br>
 위험인물일 경우 'Danger!' , 등록되지 않은 인물일경우 'Warning!'을 푸시알림으로 전송합니다.
 
 3. 결과화면
 
-<img width="60%" src="https://user-images.githubusercontent.com/81278907/235640308-6e78a25b-bb73-4de0-9c16-212a34708081.gif"/>
+<img width="49%" src="https://user-images.githubusercontent.com/81278907/235640308-6e78a25b-bb73-4de0-9c16-212a34708081.gif"/>
+<img width="50%" src="https://user-images.githubusercontent.com/81278907/236613372-1a33f0d9-fecc-4292-bf02-e906a7c44bb9.png"/>
+<img width="60%" src="https://user-images.githubusercontent.com/81278907/236613374-be75879a-bd77-45e2-9c46-11ae55f1de18.png"/>
