@@ -1,9 +1,9 @@
 from pyfcm import FCMNotification
 
 # firebase에서 fcm을 사용하기 위한 서버키를 받아와서 입력
-APIKEY = "AAAAw6SYBdc:APA91bGBiZiJV6DaL4oed11R8ML_LaQCgvzMyYO37z1oiJSKqI0VwgyGUb5DUlZqAHwPjZGTymeQOGOx6vUR88nWvGk_hcraPfehdbHedRGBnKVsC18Szeaem8iUFdEY3ADpcDrbL9nV"
+APIKEY = "Your APIKEY "
 # android studio에서 device registraion token을 받아와서 입력
-TOKEN = "dpEegY0rSjyvX7HHoKIVXb:APA91bFN-D5dM3IPBCi-4eQBm0AkPJ-wUgU2_vXL4izEfgtgeSQs7qvlnEUmlxEDGDMsQJVGPS1M1Iic1dRa7msUF7OvTQNYVecunsta6aHUq0bKsNKVfVsVUQ5ptYKCA912pNpOJ_Eu"
+TOKEN = "Your TOKEN"
 
 # FCMNotification 클래스의 인스턴스를 만들고 APIKEY를 인수로 전달
 push_service = FCMNotification(APIKEY)
