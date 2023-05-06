@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "840280049111",
+    "project_id": "sigma-fcm-8a699",
+    "storage_bucket": "sigma-fcm-8a699.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840280049111:android:30e0808a8d59feed3f3792",
+        "android_client_info": {
+          "package_name": "sigma.woo.fcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840280049111-h7qeh7h78so7vlc212j9epdf699ci9us.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd62xBPybh148cKfNNfSUQi0cHPM4q4yg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840280049111-h7qeh7h78so7vlc212j9epdf699ci9us.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

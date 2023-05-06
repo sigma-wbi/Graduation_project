@@ -1,8 +1,6 @@
 import cv2
-import numpy as np
-from os import makedirs
-from os.path import isdir
 from tkinter import *
+import os
 
 # 얼굴 저장 함수
 face_dirs = 'faces/'
@@ -24,31 +22,33 @@ def face_extractor(img):
     # 리턴!
     return cropped_face
 
-
-# 얼굴만 저장하는 함수
+# 추가 인물 등록시 ENTER키를 눌러서 정지
+# Function to store only faces
 def take_pictures(name):
-    # 해당 이름의 폴더가 없다면 생성
-    if not isdir(face_dirs + name):
-        makedirs(face_dirs + name)
+    # Create a folder with that name if it doesn't exist
+    if not os.path.exists(face_dirs + name):
+        os.makedirs(face_dirs + name)
 
-    # 카메라 ON
+    # Get the count of existing files in the folder
+    files = os.listdir(face_dirs + name)
+    count = len(files)
+
+    # Camera ON
     cap = cv2.VideoCapture(0)
-    count = 0
 
     while True:
-        # 카메라로 부터 사진 한장 읽어 오기
+        # Read a picture from the camera
         ret, frame = cap.read()
-        # 사진에서 얼굴 검출 , 얼굴이 검출되었다면
+        # Face detection in a photo, if a face is detected
         if face_extractor(frame) is not None:
-
             count += 1
-            # 200 x 200 사이즈로 줄이거나 늘린다음
+            # Reduce or expand to 200 x 200 size
             face = cv2.resize(face_extractor(frame), (200, 200))
-            # 흑백으로 바꿈
+            # convert to black and white
             face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
 
-            # 200x200 흑백 사진을 faces/얼굴 이름/userxx.jpg 로 저장
-            file_name_path = face_dirs + name + '/user' + str(count) + '.jpg'
+            # save 200x200 black and white photo as faces/face name/userxx.jpg
+            file_name_path = face_dirs + name + '/user' + str(count).zfill(4) + '.jpg'
             cv2.imwrite(file_name_path, face)
 
             cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
@@ -57,13 +57,15 @@ def take_pictures(name):
             print("Face not Found")
             pass
 
-        # 얼굴 사진 100장을 다 얻었거나 enter키 누르면 종료
+        # If you get all 100 face photos or press the enter key, exit
         if cv2.waitKey(1) == 13 or count == 100:
             break
 
     cap.release()
     cv2.destroyAllWindows()
     print('Colleting Samples Complete!!!')
+
+
 
 
 if __name__ == "__main__":
@@ -101,4 +103,3 @@ if __name__ == "__main__":
     btn = Button(root, text="GROUP", command=btncmd)
     btn.pack()
     root.mainloop()
-

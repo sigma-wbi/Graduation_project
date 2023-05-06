@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 from os import listdir
 from os.path import isdir, isfile, join
-from tkinter import *
+from fcm import sendMessage
+import time
 
 # 얼굴 인식용 haar/cascade 로딩
 face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -81,6 +82,9 @@ def run(models):
     # 카메라 열기
     cap = cv2.VideoCapture(0)
 
+    # 위험인물이 계속 카메라에 있을때 위험알림이 너무많이 전송되는것을 막기위해 10분당 한개로 제한함
+    last_warning_time = 0
+    current_time = time.time()
 
     while True:
         # 카메라로 부터 사진 한장 읽기
@@ -108,14 +112,19 @@ def run(models):
                 # 유사도 화면에 표시
                 display_string = str(confidence) + '% Confidence '
             cv2.putText(image, display_string, (100, 120), cv2.FONT_HERSHEY_COMPLEX, 1, (250, 120, 255), 2)
+            
             # 85 보다 크면 동일 인물로 간주
             if confidence > 80:
                 # 유사도 85 이상이며 데이터가 위험인물로 분류된 사람일 경우
                 if min_score_name == "XMAN" :
-                    cv2.putText(image, "Warning!  " , (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1,
-                                (0, 255, 0),
-                                2)
+                    cv2.putText(image, "Danger!", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
                     cv2.imshow('Face Cropper', image)
+
+                    # 마지막으로 보낸 위험신호에서 10분이 지났을경우만 다시 위험신호 전송
+                    if current_time - last_warning_time > 600:
+                        sendMessage("Danger!", "Dangerous person detected!")
+                        last_warning_time = current_time
+
                 # 유사도 85 이상이며 데이터가 위험인물이 아닌 거주자일 경우
                 else :
                     cv2.putText(image, min_score_name, (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1,
@@ -127,6 +136,12 @@ def run(models):
                 # 85 이하
                 cv2.putText(image, "Unknown", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 255), 2)
                 cv2.imshow('Face Cropper', image)
+                
+                # 마지막으로 보낸 위험신호에서 10분이 지났을경우만 다시 위험신호 전송
+                if current_time - last_warning_time > 600:
+                        sendMessage("Warning!", "Unknown person detected!")
+                        last_warning_time = current_time
+                        
         except:
             # 얼굴 검출 안됨
             cv2.putText(image, "Face Not Found", (250, 450), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 0, 0), 2)
@@ -139,7 +154,5 @@ def run(models):
 
 
 if __name__ == "__main__":
-    # 학습 시작
     models = trains()
-    #
     run(models)
